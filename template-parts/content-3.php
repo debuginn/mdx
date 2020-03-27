@@ -1,7 +1,7 @@
 <?php if(wp_get_attachment_url( get_post_thumbnail_id(get_the_ID()))){$Imagesurl=wp_get_attachment_url( get_post_thumbnail_id(get_the_ID()));}else{$Imagesurl="";}if(mdx_get_option("mdx_post_def_img")=="false" && $Imagesurl == ""){?>
     <div class="mdui-card postDiv mdui-center mdui-hoverable">
     <div class="mdui-card-actions">
-        <a href="<?php the_permalink();?>" class="mdui-text-color-theme-accent ainList"><h1><?php the_title();?></h1></a>
+        <a href="<?php the_permalink();?>" class="mdui-text-color-theme ainList"><h1><?php the_title();?></h1></a>
         <?php if(mdx_get_option("mdx_echo_post_sum")=="true"){ ?><p class="ct1-p mdui-text-color-black cont2"><?php if(post_password_required()){_e('这篇文章受密码保护，输入密码后才能查看。', 'mdx');}else{$summ = mdx_get_post_excerpt($post, 250);if($summ !== ""){echo $summ;}else{_e("这篇文章没有摘要");}}?><p><?php }?>
         <div class="mdui-divider underline"></div>
         <?php
@@ -40,11 +40,11 @@
 </div>
 <?php }else{if($Imagesurl == ""){$Imagesurl=get_template_directory_uri().'/img/dpic.jpg';}?>
 <div class="mdui-card postDiv mdui-center mdui-hoverable">
-    <div class="mdui-card-media">
+    <div class="mdui-card-media mdui-color-theme">
     <?php if(mdx_get_option('mdx_post_list_img_height') === "auto"){?>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAMAAAAoyzS7AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRFsbGxAAAA/JhxRAAAAAxJREFUeNpiYAAIMAAAAgABT21Z4QAAAABJRU5ErkJggg==" data-original="<?php echo "$Imagesurl"?>" alt="<?php echo "$Imagesurl"?>" title="<?php the_title();?>" class="LazyLoadList mdui-color-theme mdui-text-color-theme LazyLoadListImg">
+    <img src="data:image/gif;base64,R0lGODlhAgABAIAAALGxsQAAACH5BAAAAAAALAAAAAACAAEAAAICBAoAOw==" data-src="<?php echo "$Imagesurl"?>" alt="<?php echo "$Imagesurl"?>" title="<?php the_title();?>" class="LazyLoadList mdui-color-theme mdui-text-color-theme lazyload">
     <?php }else{?>
-    <div class="post_list_t_img LazyLoadListImg mdui-color-theme" data-original="<?php echo "$Imagesurl"?>" title="<?php the_title();?>"></div>
+    <div class="post_list_t_img lazyload mdui-color-theme" data-bg="<?php echo "$Imagesurl"?>" title="<?php the_title();?>"></div>
     <?php }?>
         <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
             <div class="mdui-card-primary">

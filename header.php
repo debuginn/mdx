@@ -7,7 +7,10 @@
 <?php if(is_home()){$mdx_js_name2='js';}elseif(is_category()||is_archive()||is_search()){$mdx_js_name2='ac';}elseif(is_single()){$mdx_js_name2='post';}elseif(is_page()){$mdx_js_name2='page';}else{$mdx_js_name2='js';}?>
 <link rel="preload" href="<?php echo get_bloginfo('template_url');?>/js/<?php echo $mdx_js_name2?>.js?ver=<?php echo get_option("mdx_version_commit");?>" as="script">
 <link rel="preload" href="<?php echo get_bloginfo('template_url');?>/mdui/icons/material-icons/<?php if(mdx_get_option("mdx_md2")=="false"){ ?>MaterialIcons-Regular.woff2<?php }else{ ?>material_2_icon_font.woff2<?php } ?>" as="font" type="font/woff2" crossorigin>
-<?php }?>
+<?php if(mdx_get_option('mdx_md2')=="true" && mdx_get_option('mdx_md2_font')=="true"){?>
+<link rel="preload" href="<?php echo get_bloginfo('template_url');?>/fonts/Montserrat-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="<?php echo get_bloginfo('template_url');?>/fonts/Montserrat-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+<?php }}?>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <?php if(mdx_get_option('mdx_safari')=="true"){?>
 <link rel="mask-icon" href="<?php echo mdx_get_option('mdx_svg');?>" color="<?php echo mdx_get_option('mdx_svg_color');?>">
@@ -29,7 +32,7 @@ if($site_description && (is_home() || is_front_page())) echo " - $site_descripti
 <meta property="og:title" content="<?php global $page, $paged;wp_title('-', true, 'right');
 bloginfo('name');$site_description = get_bloginfo('description', 'display');if($site_description && (is_home() || is_front_page())) echo " - $site_description";if($paged >= 2 || $page >= 2) echo ' - '.sprintf(__('第 %s 页'), max($paged, $page));?>">
 <meta property="og:type" content="article">
-<meta property="og:url" content="<?php global $wp;$mdx_current_url=home_url(add_query_arg(array(),$wp->request));echo $mdx_current_url;?>">
+<meta property="og:url" content="<?php global $wp;$mdx_current_url=mdx_get_now_url(is_single(), isset($post) ? (int)$post->ID : 0);echo $mdx_current_url;?>">
 <?php
 $mdx_des=mdx_get_option('mdx_seo_des');
 $mdx_s_key=mdx_get_option('mdx_seo_key');

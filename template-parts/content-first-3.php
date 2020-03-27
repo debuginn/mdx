@@ -1,7 +1,7 @@
 <?php if(wp_get_attachment_url( get_post_thumbnail_id(get_the_ID()))){$Imagesurl=wp_get_attachment_url( get_post_thumbnail_id(get_the_ID()));}else{$Imagesurl="";}if(mdx_get_option("mdx_post_def_img")=="false" && $Imagesurl == ""){?>
     <div class="mdui-card postDiv mdui-center mdui-hoverable">
     <div class="mdui-card-actions">
-        <a href="<?php the_permalink();?>" class="mdui-text-color-theme-accent ainList"><h1><?php the_title();?></h1></a>
+        <a href="<?php the_permalink();?>" class="mdui-text-color-theme ainList"><h1><?php the_title();?></h1></a>
         <?php if(mdx_get_option("mdx_echo_post_sum")=="true"){ ?><p class="ct1-p mdui-text-color-black cont2"><?php if(post_password_required()){_e('这篇文章受密码保护，输入密码才能看哦', 'mdx');}else{$summ = mdx_get_post_excerpt($post, 250);if($summ !== ""){echo $summ;}else{_e("这篇文章没有摘要");}}?><p><?php }?>
         <div class="mdui-divider underline"></div>
         <?php
@@ -40,11 +40,11 @@
 </div>
 <?php }else{if($Imagesurl == ""){$Imagesurl=get_template_directory_uri().'/img/dpic.jpg';}?>
 <div class="mdui-card postDiv mdui-center mdui-hoverable">
-    <div class="mdui-card-media">
+    <div class="mdui-card-media mdui-color-theme">
     <?php if(mdx_get_option('mdx_post_list_img_height') === "auto"){?>
     <img src="<?php echo "$Imagesurl"?>" alt="<?php echo "$Imagesurl"?>" title="<?php the_title();?>">
     <?php }else{?>
-    <div class="post_list_t_img  mdui-color-theme" style="background-image:url(<?php echo "$Imagesurl"?>);" title="<?php the_title();?>"></div>
+    <div class="post_list_t_img mdui-color-theme mdx-bg-loaded" style="background-image:url(<?php echo "$Imagesurl"?>);" title="<?php the_title();?>"></div>
     <?php }?>
         <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
             <div class="mdui-card-primary">

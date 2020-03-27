@@ -1,14 +1,14 @@
 <?php
 function mdx_admin_function(){
-    add_menu_page(__('MDx主题', 'mdx'), __('MDx主题', 'mdx'), 'manage_options', 'mdx_admin','mdx_display_sub_function','dashicons-hammer');
+    add_menu_page(__('MDx主题', 'mdx'), __('MDx 主题', 'mdx'), 'manage_options', 'mdx_admin','mdx_display_sub_function','dashicons-hammer');
 }
 function mdx_add_admin(){
-    add_submenu_page('mdx_admin', __('MDx主题 - 样式', 'mdx'), __('样式', 'mdx'), 'manage_options', 'mdx_styles', 'mdx_display_sub_function_one');
-    add_submenu_page('mdx_admin', __('MDx主题 - 功能', 'mdx'), __('功能', 'mdx'), 'manage_options', 'mdx_functions', 'mdx_display_sub_function_two');
-    add_submenu_page('mdx_admin', __('MDx主题 - 关于', 'mdx'), __('关于', 'mdx'), 'manage_options', 'mdx_about', 'mdx_display_sub_function_three');
+    add_submenu_page('mdx_admin', __('MDx 主题 - 样式', 'mdx'), __('样式', 'mdx'), 'manage_options', 'mdx_styles', 'mdx_display_sub_function_one');
+    add_submenu_page('mdx_admin', __('MDx 主题 - 功能', 'mdx'), __('功能', 'mdx'), 'manage_options', 'mdx_functions', 'mdx_display_sub_function_two');
+    add_submenu_page('mdx_admin', __('MDx 主题 - 关于', 'mdx'), __('关于', 'mdx'), 'manage_options', 'mdx_about', 'mdx_display_sub_function_three');
 }
 function mdx_display_sub_function(){
-    echo '<h1>'.__('MDx主题', 'mdx').'</h1>';
+    echo '<h1>'.__('MDx 主题', 'mdx').'</h1>';
 }
 function mdx_display_sub_function_one(){
     wp_register_style('mdx_admin_preview', get_template_directory_uri().'/includes/admin_preview.css');
@@ -26,7 +26,8 @@ function mdx_display_sub_function_three(){
             'http'=>array('method'=>"GET",'header'=>"User-Agent: MDxThemeinWordPress\r\n")
         );
         $contexts2 = stream_context_create($opt2);
-        $mdx_data2 = file_get_contents('https://mdxupdate.flyhigher.top/mdx/getnews', false, $contexts2);
+        $lang = empty(get_option("WPLANG")) ? "en_US" : get_option("WPLANG");
+        $mdx_data2 = file_get_contents('https://mdxupdate.flyhigher.top/mdx/getnews?lang='.$lang.'&ver='.get_option('mdx_version'), false, $contexts2);
         $mdx_news = '';
         if($mdx_data2 != ''){
             $mdx_news = '<div class="notice notice-info">
@@ -59,13 +60,20 @@ function mdx_display_sub_function_three(){
     }
 
 echo '<div class="wrap">
-<h1>'.__('MDx主题 - 关于', 'mdx').'</h1>'.$mdx_ifedit.$mdx_news.'
+<h1>'.__('MDx 主题 - 关于', 'mdx').'</h1>'.$mdx_ifedit.$mdx_news.'
 <p class="mdx-admin-img"><img src="../wp-content/themes/mdx/img/admin.jpg"></p>
 <h2 style="font-size:19px;">'.__('感谢使用 MDx 主题', 'mdx').'</h2>
 <p style="font-size:15px;">'.__('我是 Axton Yao，这个主题由我开发。我的网站是', 'mdx').' <a href="https://flyhigher.top" target="_blank">flyhigher.top</a></p>
 <p style="font-size:15px;">'.__('对主题有任何疑问，建议先查阅 ', 'mdx').'<a href="https://doc.flyhigher.top/mdx/" target="_blank">'.__('主题文档', 'mdx').'</a></p>
 <p style="font-size:15px;">'.__('这个项目的 Github 地址是 ', 'mdx').'<a href="https://github.com/yrccondor/mdx" target="_blank">github.com/yrccondor/mdx</a>'.__('。如果你有兴趣，欢迎为这个项目做出贡献。同时，求 Star。', 'mdx').'</p>
 <p style="font-size:15px;">'.__('这个主题的诞生离不开 MDUI，这是一个优秀的前端框架项目，你可以在他们的官方网站上了解更多：', 'mdx').'<a href="https://mdui.org" target="_blank">mdui.org</a></p>
+<br>
+<p style="font-size:17px;"><strong>'.__('感谢以下译者帮助翻译 MDx：', 'mdx').'</strong></p>
+<ul style="font-size:15px;margin-left:17px;list-style:disc">
+<li><a href="https://github.com/Sn0bzy" target="_blank">Sn0bzy</a> (Türkçe)</li>
+<li><a href="https://github.com/yechs" target="_blank">yechs</a> (English)</li>
+<li><a href="https://github.com/AngelKitty" target="_blank">AngelKitty</a> (繁體中文)</li>
+</ul>
 <br>
 <p style="font-size:12px;">'.__('当前版本 v', 'mdx').get_option('mdx_version').'</p>
 <p style="font-size:12px;">'.__('构建版本 v', 'mdx').get_option('mdx_version_commit').'</p>
